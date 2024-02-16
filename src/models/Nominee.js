@@ -12,4 +12,4 @@ const nomineeSchema = new mongoose.Schema({
     // Add other fields as necessary
 });
 
-module.exports = mongoose.model('Nominee', nomineeSchema);
+module.exports = mongoose.model('Nominee', nomineeSchema, "nominees");

@@ -15,4 +15,4 @@ const alertLogSchema = new mongoose.Schema({
     // Add other fields as necessary
 });
 
-module.exports = mongoose.model('AlertLog', alertLogSchema);
+module.exports = mongoose.model('AlertLog', alertLogSchema, "alert_logs");

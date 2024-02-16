@@ -9,4 +9,4 @@ const userAssetSchema = new mongoose.Schema({
     // Add other fields as necessary
 });
 
-module.exports = mongoose.model('UserAsset', userAssetSchema);
+module.exports = mongoose.model('UserAsset', userAssetSchema, "user_asset_mapping");

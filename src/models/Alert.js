@@ -13,4 +13,4 @@ const alertSchema = new mongoose.Schema({
     // Add other fields as necessary
 });
 
-module.exports = mongoose.model('Alert', alertSchema);
+module.exports = mongoose.model('Alert', alertSchema, "alerts");
