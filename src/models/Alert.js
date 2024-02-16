@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const alertSchema = new mongoose.Schema({
-    id: { type: String, required: true }, // unique id of the document
+    _id: { type: String, required: true }, // unique id of the document
     userId: { type: String, ref: 'User', required: true }, // user id
     type: { type: String, required: true }, // whatsapp / email / telegram / sms / ivr call / etc
     address: { type: String, required: true }, // address where the alert needs to be sent (can be mobile number or email id)

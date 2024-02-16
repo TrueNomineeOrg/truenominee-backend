@@ -1,5 +1,5 @@
 const AssetClass = {
-    BANK_DEPOSITS: 'Bank Deposits',
+    BANKS: 'Bank Accounts & Deposits',
     MUTUAL_FUNDS: 'Mutual Funds',
     EQUITY_MARKETS: 'National and International Stock Markets',
     INSURANCE: 'Insurance Policies',
@@ -9,3 +9,5 @@ const AssetClass = {
     COMMODITIES: 'Commodities',
     CRYPTOCURRENCY: 'Crypto Currency'
   }
+
+  module.exports = AssetClass;

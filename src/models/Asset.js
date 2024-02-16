@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const assetSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+    _id: { type: String, required: true },
     name: { type: String, required: true },
     class: { type: String, required: true },
     logo: { type: String, required: false}

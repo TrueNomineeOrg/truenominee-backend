@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const alertLogSchema = new mongoose.Schema({
-    id: { type: String, required: true }, // unique id of the document
+    _id: { type: String, required: true }, // unique id of the document
     alertId: { type: String, ref: 'Alert', required: true }, // alert id
     userId: { type: String, required: true},
     initiatedAt: { type: Date, required: true},
