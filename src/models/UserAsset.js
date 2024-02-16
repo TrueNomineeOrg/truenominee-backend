@@ -2,9 +2,9 @@
 const mongoose = require('mongoose');
 
 const userAssetSchema = new mongoose.Schema({
-    id: { type: mongoose.Schema.Types.ObjectId, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    assetId: { type: mongoose.Schema.Types.ObjectId, ref: 'Asset', required: true },
+    id: { type: String, required: true },
+    userId: { type: String, ref: 'User', required: true },
+    assetId: { type: String, ref: 'Asset', required: true },
     detail: { type: Object, required: false },
     // Add other fields as necessary
 });
