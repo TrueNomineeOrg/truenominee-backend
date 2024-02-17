@@ -41,13 +41,13 @@ router.post('/assets', async (req, res) => {
 
 router.get('/assets/:userId', async (req, res) => {
     const { userId } = req.params;
-    
+
     try {
-      const assets = await getAssetsByUserId(userId);
-      res.json(assets);
+        const assets = await getAssetsByUserId(userId);
+        res.json(assets);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch user assets", error: error.toString() });
+        res.status(500).json({ message: "Failed to fetch user assets", error: error.toString() });
     }
-  });
+});
 
 module.exports = router;
