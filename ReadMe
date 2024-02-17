@@ -1,0 +1,4 @@
+MacOS
+1. Instal homebrew - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2. Instal nodejs and npm - brew install node
+3. Install - npm install express google-auth-library

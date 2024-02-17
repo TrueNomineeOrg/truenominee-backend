@@ -5,6 +5,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const connectDB = require('./db');
 
+
+const userController = require('./controllers/userController');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,3 +42,7 @@ app.get('/auth/google/callback',
     res.redirect('/');
   });
 
+
+// Define your routes using the imported functions
+app.post('/login', userController.loginUser);
+app.post('/session', userController.createSession);
