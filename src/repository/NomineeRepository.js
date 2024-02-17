@@ -39,3 +39,5 @@ class NomineeRepository {
 
     // Add other generic methods as needed...
 }
+
+module.exports = NomineeRepository;

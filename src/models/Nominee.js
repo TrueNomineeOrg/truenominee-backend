@@ -2,8 +2,8 @@
 const mongoose = require('mongoose');
 
 const nomineeSchema = new mongoose.Schema({
-    id: { type: mongoose.Schema.Types.ObjectId, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    _id: { type: String, required: true },
+    userId: { type: String, ref: 'User', required: true },
     name: { type: String, required: true },
     phone: { type: String, required: true },
     relation: { type: String, required: false },
@@ -12,4 +12,4 @@ const nomineeSchema = new mongoose.Schema({
     // Add other fields as necessary
 });
 
-module.exports = mongoose.model('Nominee', nomineeSchema);
+module.exports = mongoose.model('Nominee', nomineeSchema, "nominees");

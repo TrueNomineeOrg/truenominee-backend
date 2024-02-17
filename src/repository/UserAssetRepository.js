@@ -63,3 +63,5 @@ class UserAssetRepository {
         }
     }
 }
+
+module.exports = UserAssetRepository;

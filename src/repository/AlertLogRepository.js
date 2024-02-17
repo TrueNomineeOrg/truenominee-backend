@@ -47,3 +47,5 @@ class AlertLogRepository {
 
     // get 
 }
+
+module.exports = AlertLogRepository;

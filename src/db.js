@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('your_mongodb_uri', {
+    await mongoose.connect('mongodb://localhost:27017/truenominee', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       // Add any other options here

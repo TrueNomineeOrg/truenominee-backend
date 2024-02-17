@@ -9,6 +9,9 @@ const connectDB = require('./db');
 const userController = require('./controllers/userController');
 
 const app = express();
+const assetsRouter = require('./routes/assetsRoutes'); // Adjust the path as necessary
+
+app.use('/api', assetsRouter);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

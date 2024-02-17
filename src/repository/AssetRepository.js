@@ -28,7 +28,7 @@ class AssetRepository {
     }
 
     // Method to get all entities of this type
-    async getAll() {
+    static async getAll() {
         try {
             const entities = await Asset.find({});
             return entities;
@@ -39,3 +39,5 @@ class AssetRepository {
 
     // Add other generic methods as needed...
 }
+
+module.exports = AssetRepository;

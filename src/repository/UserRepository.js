@@ -39,3 +39,5 @@ class UserRepository {
 
     // Other user-related database operations
 }
+
+module.exports = UserRepository;

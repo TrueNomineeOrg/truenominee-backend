@@ -2,8 +2,8 @@
 const mongoose = require('mongoose');
 
 const alertSchema = new mongoose.Schema({
-    id: { type: mongoose.Schema.Types.ObjectId, required: true }, // unique id of the document
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // user id
+    _id: { type: String, required: true }, // unique id of the document
+    userId: { type: String, ref: 'User', required: true }, // user id
     type: { type: String, required: true }, // whatsapp / email / telegram / sms / ivr call / etc
     address: { type: String, required: true }, // address where the alert needs to be sent (can be mobile number or email id)
     lastActiveAt: { type: Date, required: true }, // when the user is last active - updated when signs in / acks the alert / 3rd party cookie tracking
@@ -13,4 +13,4 @@ const alertSchema = new mongoose.Schema({
     // Add other fields as necessary
 });
 
-module.exports = mongoose.model('Alert', alertSchema);
+module.exports = mongoose.model('Alert', alertSchema, "alerts");

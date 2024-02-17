@@ -39,3 +39,5 @@ class AlertRepository {
 
     // Add other generic methods as needed...
 }
+
+module.exports = AlertRepository;
