@@ -1,13 +1,16 @@
+const AssetClassType = require('./AssetClassType')
+
 const AssetClass = {
-    BANKS: 'Bank Accounts & Deposits',
-    MUTUAL_FUNDS: 'Mutual Funds',
-    EQUITY_MARKETS: 'National and International Stock Markets',
-    INSURANCE: 'Insurance Policies',
-    RETIREMENT_ACCOUNTS: 'Retirement Accounts',
-    ESOPS: 'Employer Stock Options',
-    REAL_ESTATE: 'Real Estate Investments',
-    COMMODITIES: 'Commodities',
-    CRYPTOCURRENCY: 'Crypto Currency'
-  }
+    BANKS: { name: 'Bank Accounts & Deposits', type: AssetClassType.FIXED },
+    MUTUAL_FUNDS: { name: 'Mutual Funds', type: AssetClassType.FIXED },
+    EQUITY_MARKETS: { name: 'National and International Stock Markets', type: AssetClassType.FIXED },
+    INSURANCE: { name: 'Insurance Policies', type: AssetClassType.FIXED },
+    RETIREMENT_ACCOUNTS: { name: 'Retirement Accounts', type: AssetClassType.FIXED },
+    ESOPS: { name: 'Employer Stock Options', type: AssetClassType.VARIABLE },
+    REAL_ESTATE: { name: 'Real Estate Investments', type: AssetClassType.VARIABLE },
+    COMMODITIES: { name: 'Commodities', type: AssetClassType.VARIABLE },
+    CRYPTOCURRENCY: { name: 'Crypto Currency', type: AssetClassType.VARIABLE },
+    CUSTOM: { name: 'Custom Asset Class', type: AssetClassType.VARIABLE }
+}
 
   module.exports = AssetClass;
