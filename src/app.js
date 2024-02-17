@@ -47,5 +47,7 @@ app.get('/auth/google/callback',
 
 
 // Define your routes using the imported functions
-app.post('/login', userController.loginUser);
-app.post('/session', userController.createSession);
+app.post('/sendOtp', userController.sendOtp);
+app.post('/verifyOtp', userController.verifyOtp);
+app.post('/authenticate', userController.authenticateSession);
+app.get('/loginViaGmail', userController.loginViaGmail);

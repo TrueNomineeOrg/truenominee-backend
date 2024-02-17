@@ -1,6 +1,7 @@
 const Session = require('../models/Session'); // Replace EntityName with your actual model name
 
 class SessionRepository {
+
     async createSession(sessionData) {
         const session = new Session(sessionData);
         await session.save();
@@ -27,14 +28,14 @@ class SessionRepository {
         }
     }
 
-    // Method to get all entities of this type
-    async getAll() {
-        try {
-            const entities = await Session.find({});
-            return entities;
-        } catch (error) {
-            throw error;
-        }
+    // Getter function to retrieve session by user ID
+    async getSessionByUserId(userId) {
+        return sessions.find(session => session.userId === userId);
+    }
+
+    // Getter function to retrieve session by session token
+    async getSessionByToken(token) {
+        return sessions.find(session => session.token === token);
     }
 
 }
