@@ -49,7 +49,7 @@ class UserAssetRepository {
 
     static async getUserAssetByUserId(userId) {
         try {
-            const userAsset = await UserAsset.find({ userId: userId });
+            const userAsset = await UserAsset.find({ userId: userId }, { __v: 0 });
             return userAsset;
         } catch (error) {
             // Handle or throw the error

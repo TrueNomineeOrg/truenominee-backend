@@ -1,7 +1,7 @@
 // Assuming you have an Express app set up
 const express = require('express');
 const router = express.Router();
-const { getAllAssets, addAssets, updateAssets, deleteAssets } = require('../service/assetService'); // Adjust the path as necessary
+const { getAllAssets, addAssets, updateAssets, deleteAssets, getAssetsByUserId } = require('../service/assetService');
 
 router.get('/assets', async (req, res) => {
     try {
@@ -39,13 +39,15 @@ router.post('/assets', async (req, res) => {
     }
 });
 
-router.post('/assets/:userId', async (req, res) => {
+router.get('/assets/:userId', async (req, res) => {
+    const { userId } = req.params;
+    
     try {
-        const assets = await getAssetsByUserId(req.body);
-        res.status(201).json(asset);
+      const assets = await getAssetsByUserId(userId);
+      res.json(assets);
     } catch (error) {
-        res.status(500).send("An error occurred while fetching assets.");
+      res.status(500).json({ message: "Failed to fetch user assets", error: error.toString() });
     }
-});
+  });
 
 module.exports = router;

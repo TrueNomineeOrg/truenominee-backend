@@ -41,6 +41,15 @@ async function deleteAssets(ids) {
     return UserAssetRepository.deleteAssets(ids);
 }
 
+async function getAssetsByUserId(userId) {
+    try {
+        const assets = await UserAssetRepository.getUserAssetByUserId(userId);
+        return assets;
+      } catch (error) {
+        throw error;
+      }
+}
+
 function convertAssetsToMap(assets) {
     const assetMap = {};
     // Initialize map with all asset classes having an empty array
@@ -58,4 +67,4 @@ function convertAssetsToMap(assets) {
     return assetMap;
 }
 
-module.exports = { getAllAssets, addAssets, updateAssets, deleteAssets };
+module.exports = { getAllAssets, addAssets, updateAssets, deleteAssets, getAssetsByUserId };
