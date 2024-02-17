@@ -1,4 +1,4 @@
-// userController.js
+// authController.js
 
 const loginUser = (req, res) => {
   // Your login logic here

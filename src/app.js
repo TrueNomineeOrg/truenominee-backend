@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const connectDB = require('./db');
 
 
-const userController = require('./controllers/userController');
+const userController = require('./controllers/authController');
 
 const app = express();
 const assetsRouter = require('./routes/assetsRoutes'); // Adjust the path as necessary
