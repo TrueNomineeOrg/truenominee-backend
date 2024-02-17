@@ -28,10 +28,10 @@ async function updateAssets(assets) {
     console.log(assets);
     return Promise.all(assets.map(asset =>
         UserAssetRepository.updateAssetDetailById(asset._id, asset.detail)
-        .catch(error => {
-            console.error(`Failed to update asset with _id: ${asset._id}`, error);
-            return null; // Return null or a meaningful error object
-          })
+            .catch(error => {
+                console.error(`Failed to update asset with _id: ${asset._id}`, error);
+                return null; // Return null or a meaningful error object
+            })
     ));
 }
 
@@ -45,9 +45,9 @@ async function getAssetsByUserId(userId) {
     try {
         const assets = await UserAssetRepository.getUserAssetByUserId(userId);
         return assets;
-      } catch (error) {
+    } catch (error) {
         throw error;
-      }
+    }
 }
 
 function convertAssetsToMap(assets) {
