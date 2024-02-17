@@ -1,13 +1,13 @@
 const Alert = require('../models/Alert');
 
 class AlertRepository {
-    async createAlert(alertData) {
+    static async createAlert(alertData) {
         const alert = new Alert(alertData);
         await alert.save();
         return alert;
     }
 
-    async updateAlert(id, updateData) {
+    static async updateAlert(id, updateData) {
         try {
             const alert = await Alert.findByIdAndUpdate(id, updateData, { new: true });
             return alert;
@@ -18,19 +18,28 @@ class AlertRepository {
     }
 
     // Method to get entity by ID
-    async getById(id) {
+    static async getById(id) {
         try {
-            const entity = await Alert.findById(id);
+            const entity = await Alert.findById(id, { __v: 0 });
             return entity;
         } catch (error) {
             throw error;
         }
     }
 
-    // Method to get all entities of this type
-    async getAll() {
+    static async getByUserIdAndStatus(userId, status) {
         try {
-            const entities = await Alert.find({});
+            const alerts = await Alert.find({userId: userId, status: status}, { __v: 0 });
+            return alerts;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    // Method to get all entities of this type
+    static async getAll() {
+        try {
+            const entities = await Alert.find({}, { __v: 0 });
             return entities;
         } catch (error) {
             throw error;

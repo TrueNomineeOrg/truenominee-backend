@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { getAllAssets, addAssets, updateAssets, deleteAssets, getAssetsByUserId } = require('../service/assetService');
 const { addNominees, updateNominees, deleteNominees, getNomineesByUserId } = require('../service/nomineeService');
+const { createAlert, updateAlert, deleteAlert, getAlertsByUserId } = require('../service/alertService');
 
 
 router.get('/assets', async (req, res) => {
@@ -89,5 +90,45 @@ router.get('/nominees/:userId', async (req, res) => {
         res.status(500).json({ message: "Failed to fetch user nominees", error: error.toString() });
     }
 });
+
+router.post('/alerts', async (req, res) => {
+    try {
+        const alert = await createAlert(req.body);
+        res.status(201).json(alert);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to create alert.', error: error.message });
+    }
+});
+
+router.put('/alerts/:id', async (req, res) => {
+    try {
+        const updatedAlert = await updateAlert(req.params.id, req.body);
+        res.json(updatedAlert);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to update alert.', error: error.message });
+    }
+});
+
+router.delete('/alerts/:id', async (req, res) => {
+    try {
+        await deleteAlert(req.params.id);
+        res.json({ message: 'Alert marked as inactive.' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to delete alert.', error: error.message });
+    }
+});
+
+router.get('/alerts/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const nominees = await getAlertsByUserId(userId);
+        res.json(nominees);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch user nominees", error: error.toString() });
+    }
+});
+
+
 
 module.exports = router;
