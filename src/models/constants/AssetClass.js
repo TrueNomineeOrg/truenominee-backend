@@ -6,11 +6,11 @@ const AssetClass = {
     EQUITY_MARKETS: { name: 'National and International Stock Markets', type: AssetClassType.FIXED },
     INSURANCE: { name: 'Insurance Policies', type: AssetClassType.FIXED },
     RETIREMENT_ACCOUNTS: { name: 'Retirement Accounts', type: AssetClassType.FIXED },
-    ESOPS: { name: 'Employer Stock Options', type: AssetClassType.VARIABLE },
-    REAL_ESTATE: { name: 'Real Estate Investments', type: AssetClassType.VARIABLE },
-    COMMODITIES: { name: 'Commodities', type: AssetClassType.VARIABLE },
-    CRYPTOCURRENCY: { name: 'Crypto Currency', type: AssetClassType.VARIABLE },
-    CUSTOM: { name: 'Custom Asset Class', type: AssetClassType.VARIABLE }
+    ESOPS: { name: 'Employer Stock Options', type: AssetClassType.CUSTOM },
+    REAL_ESTATE: { name: 'Real Estate Investments', type: AssetClassType.CUSTOM },
+    COMMODITIES: { name: 'Commodities', type: AssetClassType.CUSTOM },
+    CRYPTOCURRENCY: { name: 'Crypto Currency', type: AssetClassType.CUSTOM },
+    CUSTOM: { name: 'Custom Asset Class', type: AssetClassType.CUSTOM }
 }
 
   module.exports = AssetClass;
