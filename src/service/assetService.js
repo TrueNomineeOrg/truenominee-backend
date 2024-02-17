@@ -5,7 +5,6 @@ const AssetClass = require('../models/constants/AssetClass')
 const getAllAssets = async () => {
     try {
         const assets = await AssetRepository.getAll();
-
         return convertAssetsToMap(assets);
     } catch (error) {
         // Handle or log the error appropriately
