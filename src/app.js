@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const connectDB = require('./db');
 
 const app = express();
-const assetsRouter = require('./routes/assetsRoutes'); // Adjust the path as necessary
+const generalRoute = require('./routes/generalRoute');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -40,4 +40,4 @@ app.get('/auth/google/callback',
     res.redirect('/');
   });
 
-  app.use('/api', assetsRouter);
+app.use('/api', generalRoute);

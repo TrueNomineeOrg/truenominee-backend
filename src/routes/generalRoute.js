@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const { getAllAssets, addAssets, updateAssets, deleteAssets, getAssetsByUserId } = require('../service/assetService');
+const { addNominees, updateNominees, deleteNominees, getNomineesByUserId } = require('../service/nomineeService');
+
 
 router.get('/assets', async (req, res) => {
     try {
@@ -32,7 +34,8 @@ router.post('/assets', async (req, res) => {
             await deleteAssets(deletedAssets);
         }
 
-        res.status(200).json({ message: 'Assets processed successfully' });
+        const latestAssets = await getAssetsByUserId(userId);
+        res.json(latestAssets);
     } catch (error) {
         console.error('Error processing assets:', error);
         res.status(500).json({ error: 'Failed to process assets' });
@@ -47,6 +50,43 @@ router.get('/assets/:userId', async (req, res) => {
         res.json(assets);
     } catch (error) {
         res.status(500).json({ message: "Failed to fetch user assets", error: error.toString() });
+    }
+});
+
+router.post('/nominees', async (req, res) => {
+    const { userId, addedNominees, updatedNominees, deletedNominees } = req.body;
+
+    try {
+        // Handle added nominees
+        if (addedNominees && addedNominees.length) {
+            await addNominees(userId, addedNominees);
+        }
+
+        // Handle updated nominees
+        if (updatedNominees && updatedNominees.length) {
+            await updateNominees(updatedNominees);
+        }
+
+        // Handle deleted nominees
+        if (deletedNominees && deletedNominees.length) {
+            await deleteNominees(deletedNominees);
+        }
+
+        const nominees = await getNomineesByUserId(userId);
+        res.json(nominees);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to update nominee information.', error: error.message });
+    }
+});
+
+router.get('/nominees/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const nominees = await getNomineesByUserId(userId);
+        res.json(nominees);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch user nominees", error: error.toString() });
     }
 });
 
