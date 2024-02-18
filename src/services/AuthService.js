@@ -1,5 +1,4 @@
 const { OAuth2Client } = require('google-auth-library');
-const axios = require('axios');
 
 const sessionService = require('SessionService');
 const notificationService = require('NotificationService');
