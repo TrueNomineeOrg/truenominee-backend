@@ -4,15 +4,19 @@ class UserAssetRepository {
 
     // create
 
-    async createUserAsset(userAssetData) {
+    static async createUserAsset(userAssetData) {
         const userAsset = new UserAsset(userAssetData);
         await userAsset.save();
         return userAsset;
     }
 
+    static async addAssets(newAssets) {
+        return await UserAsset.insertMany(newAssets);
+    }
+
     // update
 
-    async updateUserAsset(id, updateData) {
+    static async updateUserAsset(id, updateData) {
         try {
             const userAsset = await UserAsset.findByIdAndUpdate(id, updateData, { new: true });
             return userAsset;
@@ -22,19 +26,18 @@ class UserAssetRepository {
         }
     }
 
-    async updateUserAssetByUserIdAssetId(userId, assetId, updateData) {
+    static async updateAssetDetailById(id, detail) {
         try {
-            const userAsset = await UserAsset.updateMany({ userId: userId, assetId: assetId }, updateData, { new: true });
-            return userAsset;
+            const a = await UserAsset.findByIdAndUpdate(id, { $set: {detail: detail} }, { new: true });
+            return a;
         } catch (error) {
-            // Handle or throw the error
             throw error;
         }
     }
 
     // get
 
-    async getUserAssetById(id) {
+    static async getUserAssetById(id) {
         try {
             const userAsset = await UserAsset.findById(id);
             return userAsset;
@@ -44,9 +47,9 @@ class UserAssetRepository {
         }
     }
 
-    async getUserAssetByUserId(userId) {
+    static async getUserAssetByUserId(userId) {
         try {
-            const userAsset = await UserAsset.find({ userId: userId });
+            const userAsset = await UserAsset.find({ userId: userId }, { __v: 0 });
             return userAsset;
         } catch (error) {
             // Handle or throw the error
@@ -54,10 +57,18 @@ class UserAssetRepository {
         }
     }
 
-    async getAll() {
+    static async getAll() {
         try {
             const entities = await UserAsset.find({});
             return entities;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async deleteAssets(ids) {
+        try {
+            return await UserAsset.deleteMany({ _id: { $in: ids } });
         } catch (error) {
             throw error;
         }

@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const userController = require('./controllers/authController');
 
 const app = express();
-
+const generalRoute = require('./routes/generalRoute');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -36,13 +36,14 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 // app.get('/auth/google',
 //   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// app.get('/auth/google/callback', 
-//   passport.authenticate('google', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
+app.use('/api', generalRoute);
 
 // Define your routes using the imported functions
 app.post('/sendOtp', userController.sendOtp);

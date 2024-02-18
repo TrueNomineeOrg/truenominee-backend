@@ -1,5 +1,5 @@
 const AssetClassType = {
-    VARIABLE : 'vairable',
+    CUSTOM : 'custom',
     FIXED : 'fixed'
 }
 

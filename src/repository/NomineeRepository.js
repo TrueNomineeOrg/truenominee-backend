@@ -7,7 +7,11 @@ class NomineeRepository {
         return nominee;
     }
 
-    async updateNominee(id, updateData) {
+    static async addNominees(newNominees) {
+        return await Nominee.insertMany(newNominees);
+    }
+
+    static async updateNominee(id, updateData) {
         try {
             const nominee = await Nominee.findByIdAndUpdate(id, updateData, { new: true });
             return nominee;
@@ -27,6 +31,16 @@ class NomineeRepository {
         }
     }
 
+    static async getNomineesByUserId(userId) {
+        try {
+            const nominees = await Nominee.find({ userId: userId }, { __v: 0 });
+            return nominees;
+        } catch (error) {
+            // Handle or throw the error
+            throw error;
+        }
+    }
+
     // Method to get all entities of this type
     async getAll() {
         try {
@@ -37,7 +51,13 @@ class NomineeRepository {
         }
     }
 
-    // Add other generic methods as needed...
+    static async deleteNominees(ids) {
+        try {
+            return await Nominee.deleteMany({ _id: { $in: ids } });
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = NomineeRepository;
