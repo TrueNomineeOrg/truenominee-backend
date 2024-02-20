@@ -33,16 +33,22 @@ const verifyOtp = (req, res) => {
 }
 
 
-const authenticateSession = (req, res) => {
-  
-}
+const fetchSession = (sessionToken) => {
+  console.log("Validate session!");
+  const sessionData = {
+    message: 'Session created - Token:XYZ',
+    userId: 'testUser'
+  };
+  console.log(sessionData);
+  return sessionData;
+};
 
 const createSession = async (req, res) => {
-  const resp = await authService.loginViaGmail();
-  console.log("Hello, Sessions!");
+  const resp = await authService.loginViaGmail(req.userId);
+  console.log("Create session!");
   console.log(resp);
   const responseData = {
-    message: 'Session created - Token:XYZ',
+    message: req.userId,
   };
   res.json(responseData);
 }
@@ -51,6 +57,6 @@ module.exports = {
   loginViaGmail,
   sendOtp,
   verifyOtp,
-  authenticateSession,
-  createSession
+  createSession,
+  fetchSession
 };

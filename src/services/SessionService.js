@@ -1,34 +1,39 @@
 // SessionService.js
 
 const sessionRepository = require('../repository/SessionRepository');
+const { v4: uuidv4 } = require('uuid');
 
-class SessionService {
 
-    async createSession(userId){
-        const sessionData = {
-            userId: userId,
-            token: "xyz",
-            status: "Active"
-          };
-        // Add expiry  
-        resp = await sessionRepository.createSession(sessionData);
-        return resp.token;
-    };
 
-    async authenticateSession(token){
-        // Use redis cache for faster response
-        const session = await sessionRepository.getSessionByToken(token);
-        // Add session expiry checks
-        if(session){
-            return true;
-        }
-        return false;
+
+async function createSession(userId){
+    const sessionData = {
+        _id: uuidv4(),
+        userId: userId,
+        token: uuidv4(),
+        status: "Active"
+        };
+    // Add expiry  
+    resp = await sessionRepository.createSession(sessionData);
+    return resp;
+ };
+
+ async function  authenticateSession(token){
+    // Use redis cache for faster response
+    const session = await sessionRepository.getSessionByToken(token);
+    // Add session expiry checks
+    if(session){
+        return true;
     }
-
-    async fetchAllSessions(userId){
-        return await sessionRepository.getSessionByUserId(userId);
-    };
-
+    return false;
 }
 
-module.exports = SessionService;
+async function  fetchAllSessions(userId){
+    return await sessionRepository.getSessionByUserId(userId);
+};
+
+module.exports = {
+    createSession,
+    authenticateSession,
+    fetchAllSessions
+};

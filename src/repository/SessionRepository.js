@@ -2,13 +2,13 @@ const Session = require('../models/Session'); // Replace EntityName with your ac
 
 class SessionRepository {
 
-    async createSession(sessionData) {
+    static async createSession(sessionData) {
         const session = new Session(sessionData);
         await session.save();
         return session;
     }
 
-    async updateSession(id, updateData) {
+    static async updateSession(id, updateData) {
         try {
             const session = await Session.findByIdAndUpdate(id, updateData, { new: true });
             return session;
@@ -19,7 +19,7 @@ class SessionRepository {
     }
 
     // Method to get entity by ID
-    async getById(id) {
+    static async getById(id) {
         try {
             const entity = await Session.findById(id);
             return entity;
@@ -29,13 +29,15 @@ class SessionRepository {
     }
 
     // Getter function to retrieve session by user ID
-    async getSessionByUserId(userId) {
+    static async getSessionByUserId(userId) {
         return sessions.find(session => session.userId === userId);
     }
 
     // Getter function to retrieve session by session token
-    async getSessionByToken(token) {
+    static async getSessionByToken(token) {
         return sessions.find(session => session.token === token);
     }
 
 }
+
+module.exports = SessionRepository;
