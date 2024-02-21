@@ -15,9 +15,14 @@ async function createSession(userId){
     return resp;
  };
 
- async function  authenticateSession(token){
+ async function fetchSession(token){
+    return await sessionRepository.getSessionByToken(token);
+ }
+
+ // Unused
+ async function authenticateSession(token){
     // Use redis cache for faster response
-    const session = await sessionRepository.getSessionByToken(token);
+    const session = fetchSession(token);
     // Add session expiry checks
     if(session){
         return true;
@@ -31,6 +36,7 @@ async function  fetchAllSessions(userId){
 
 module.exports = {
     createSession,
+    fetchSession,
     authenticateSession,
     fetchAllSessions
 };

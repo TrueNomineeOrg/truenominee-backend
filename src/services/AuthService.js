@@ -1,6 +1,8 @@
 const { OAuth2Client } = require('google-auth-library');
 const sessionService = require('./SessionService');
 const notificationService = require('./external/NotificationService');
+const userRepository = require('../repository/UserRepository');
+const { v4: uuidv4 } = require('uuid');
 
 
 // Create a new OAuth2Client with your Google OAuth credentials
@@ -26,16 +28,30 @@ async function verifyOtp(){
     // Return session token
 }
 
-async function createSession(){
+async function createSession(userId){
     return sessionService.createSession(userId);
 }
 
-async function createOrFetchUser(){
-
+async function createOrFetchUser(emailId, userName){
+    // Find if user exists
+    const user = userRepository.getUserByEmailId(emailId);
+    if(user){
+        return user.userId;
+    }
+    else{
+        const userData = {
+            _id: uuidv4(),
+            name: userName,
+            email: emailId,
+            status: "Active"
+            };
+        await userRepository.createUser(userData);
+        return userData._id;
+    }
 }
 
-async function fetchSession(){
-
+async function fetchSession(sessionToken){
+    return sessionService.fetchSession(sessionToken);
 }
 
 async function verifyIdToken(){
