@@ -42,9 +42,9 @@ const createSession = async (req, res) => {
 }
 
 module.exports = {
-  loginViaGmail,
   sendOtp,
   verifyOtp,
+  verifyIdToken,
   createSession,
   fetchSession
 };

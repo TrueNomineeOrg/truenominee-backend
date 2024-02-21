@@ -30,6 +30,6 @@ app.use('/api', generalRoute);
 // Define your routes using the imported functions
 app.post('/sendOtp', userController.sendOtp);
 app.post('/verifyOtp', userController.verifyOtp);
-// app.get('/validate', userController.fetchSession);
+app.get('/validate', userController.fetchSession);
 app.get('/createSession', userController.createSession);
 app.post('/loginViaGmail', userController.createSession);

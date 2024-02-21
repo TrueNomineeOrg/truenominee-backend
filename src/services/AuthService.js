@@ -1,5 +1,4 @@
 const { OAuth2Client } = require('google-auth-library');
-const oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 const sessionService = require('./SessionService');
 const notificationService = require('./external/NotificationService');
 
@@ -8,6 +7,7 @@ const notificationService = require('./external/NotificationService');
 const CLIENT_ID = '744708588952-olg1t088v8gmfm511c8745nouffibqpl.apps.googleusercontent.com';
 const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'http://localhost:3000/auth/google/callback'; // This should match with your Google OAuth credentials
+const oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
 
 async function sendOtp(){

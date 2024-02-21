@@ -9,19 +9,32 @@ function validateSessionToken(req, res, next) {
     const idToken = req.cookies.idToken;
     
     // Validate session token
-    if (!sessionToken && !) {
+    if (!sessionToken && !idToken) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
-    const sessionData = userController.fetchSession(sessionToken);
-    console.log("Hello, Validator");    
-    console.log(sessionData);    
-    if(sessionData){
-        req.userId = sessionData.userId;
-        // If the session token is valid, proceed to the next middleware or route handler
-        next();
+    
+    if(idToken){
+        const userData = userController.verifyIdToken(idToken);
+        if(userData){
+            req.userId = userData.userId;
+            // If the idToken is valid, proceed to the next middleware or route handler
+            next();
+        }
+        // Send a different error if Google Auth fails
+        else{
+            return res.status(401).json({ error: 'Unauthorized idToken' });
+        }
+    }
+    else if(sessionToken){
+    const sessionData = userController.fetchSession(sessionToken);   
+        if(sessionData){
+            req.userId = sessionData.userId;
+            // If the session token is valid, proceed to the next middleware or route handler
+            next();
+        }
     }
     else{
-        return res.status(401).json({ error: 'Unauthorized' });
+        return res.status(401).json({ error: 'Unauthorized sessionToken' });
     }
 }
 
