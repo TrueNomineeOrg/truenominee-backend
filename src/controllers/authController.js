@@ -1,21 +1,5 @@
 // authController.js
-// const { OAuth2Client } = require('google-auth-library');
-// const oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-
-// Redirect to Google OAuth login page
-// app.get('/auth/google', (req, res) => {
-//   const authUrl = oauth2Client.generateAuthUrl({
-//       access_type: 'offline',
-//       scope: ['email', 'profile'] // Define the scopes you need
-//   });
-//   res.redirect(authUrl);
-// });
-
 const authService = require('../services/AuthService');
-
-const loginViaGmail = (req, res) => {
-  // Your login logic here
-};
 
 // Function to validate mobile number
 const isValidMobileNumber = (mobileNumber) => {
@@ -32,6 +16,10 @@ const verifyOtp = (req, res) => {
   
 }
 
+const verifyIdToken = (req, res) => {
+
+};
+
 
 const fetchSession = (sessionToken) => {
   console.log("Validate session!");
@@ -44,7 +32,7 @@ const fetchSession = (sessionToken) => {
 };
 
 const createSession = async (req, res) => {
-  const resp = await authService.loginViaGmail(req.userId);
+  const resp = await authService.loginViaGmail(req.userId, req.token);
   console.log("Create session!");
   console.log(resp);
   const responseData = {

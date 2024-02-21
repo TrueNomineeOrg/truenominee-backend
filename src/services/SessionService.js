@@ -3,9 +3,6 @@
 const sessionRepository = require('../repository/SessionRepository');
 const { v4: uuidv4 } = require('uuid');
 
-
-
-
 async function createSession(userId){
     const sessionData = {
         _id: uuidv4(),

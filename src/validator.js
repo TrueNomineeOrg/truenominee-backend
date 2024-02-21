@@ -4,10 +4,12 @@ const userController = require('./controllers/authController');
 function validateSessionToken(req, res, next) {
     req.cookies={}
     req.cookies.sessionToken = "xyz";
+    req.cookies.idToken = "abc";
     const sessionToken = req.cookies.sessionToken; // Assuming session token is stored in a cookie
+    const idToken = req.cookies.idToken;
     
     // Validate session token
-    if (!sessionToken) {
+    if (!sessionToken && !) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
     const sessionData = userController.fetchSession(sessionToken);
