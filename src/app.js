@@ -15,6 +15,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+    res.send('Hello from App Engine!');
+  });
+  
  // Apply middleware to all routes
 app.use(validator.validateSessionToken);
 

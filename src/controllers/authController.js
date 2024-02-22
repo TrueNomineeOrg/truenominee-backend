@@ -1,6 +1,6 @@
 // authController.js
 const authService = require('../services/AuthService');
-const mocks = require('../utils/MockUtils');
+// import { mocks } from '../utils/MockUtils';
 
 // Function to validate mobile number
 const isValidMobileNumber = (mobileNumber) => {
@@ -17,9 +17,8 @@ const verifyOtp = (req, res) => {
   
 }
 
-const verifyIdToken = async (req, res) => {
-  const resp = await authService.verifyIdToken(req.token);
-  return resp;
+const verifyIdToken = (idToken) => {
+  return authService.verifyIdToken(idToken);
 };
 
 
