@@ -30,12 +30,12 @@ class SessionRepository {
 
     // Getter function to retrieve session by user ID
     static async getSessionByUserId(userId) {
-        return sessions.find(session => session.userId === userId);
+        return await Session.findOne({userId: userId });
     }
 
     // Getter function to retrieve session by session token
     static async getSessionByToken(token) {
-        return sessions.find(session => session.token === token);
+        return await Session.findOne({ token: token });
     }
 
 }

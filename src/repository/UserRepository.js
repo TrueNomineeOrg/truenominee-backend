@@ -29,8 +29,9 @@ class UserRepository {
     }
 
     static async getUserByEmailId(emailId) {
+        console.log(emailId);
         try {
-            return users.find(user => user.emailId === emailId);
+            return await User.findOne({ email: emailId });
         } catch (error) {
             // Handle or throw the error
             throw error;

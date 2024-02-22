@@ -2,7 +2,8 @@ const { OAuth2Client } = require('google-auth-library');
 const sessionService = require('./SessionService');
 const notificationService = require('./external/NotificationService');
 const userRepository = require('../repository/UserRepository');
-const { v4: uuidv4 } = require('uuid');
+const idGeneratorService = require('./IdGeneratorService');
+
 
 
 // Create a new OAuth2Client with your Google OAuth credentials
@@ -34,19 +35,18 @@ async function createSession(userId){
 
 async function createOrFetchUser(emailId, userName){
     // Find if user exists
-    const user = userRepository.getUserByEmailId(emailId);
+    const user = await userRepository.getUserByEmailId(emailId);
     if(user){
-        return user.userId;
+        return user;
     }
     else{
         const userData = {
-            _id: uuidv4(),
+            _id: idGeneratorService.generateUserId(),
             name: userName,
             email: emailId,
             status: "Active"
             };
-        await userRepository.createUser(userData);
-        return userData._id;
+        return await userRepository.createUser(userData);
     }
 }
 
@@ -60,11 +60,11 @@ async function verifyIdToken(idToken){
             idToken: idToken,
             audience: CLIENT_ID
         });
-        console.log(userInfo.payload);
-        res.send('Successfully authenticated with Google!');
+        console.log('Successfully authenticated with Google!')
+        return userInfo;
     } catch (error) {
         console.error('Error authenticating with Google:', error);
-        res.status(500).send('Error authenticating with Google');
+        return {};
     }
 };
 

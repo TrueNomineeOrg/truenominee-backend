@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     _id: { type: String, required: true },
     name: { type: String, required: false},
     mobile: { type: Number, required: false},
-    email: { type: String, required: false},
+    email: { type: String, required: false, unique: true},
     age: { type: Number, required: false},
     status: { type: String, required: true}
     // Add other fields as necessary

@@ -1,13 +1,14 @@
 // SessionService.js
 
 const sessionRepository = require('../repository/SessionRepository');
-const { v4: uuidv4 } = require('uuid');
+const idGeneratorService = require('./IdGeneratorService');
+
 
 async function createSession(userId){
     const sessionData = {
-        _id: uuidv4(),
+        _id: idGeneratorService.generateSessionId(),
         userId: userId,
-        token: uuidv4(),
+        token: idGeneratorService.generateSessionToken(),
         status: "Active"
         };
     // Add expiry  

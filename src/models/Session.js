@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const sessionSchema = new mongoose.Schema({
     _id: { type: String, required: true },
-    userId: { type: String, ref: 'User', required: true },
+    userId: { type: String, ref: 'User', required: true},
     token: { type: String, required: true},
     status: { type: String, required: true },
     createdAt: { type: Number, required: false},
