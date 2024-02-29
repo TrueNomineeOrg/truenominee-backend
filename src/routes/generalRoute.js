@@ -7,6 +7,11 @@ const { createAlert, updateAlert, deleteAlert, getAlertsByUserId } = require('..
 
 
 router.get('/assets', async (req, res) => {
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
+
     try {
         const assets = await getAllAssets();
         res.json(assets);
@@ -16,8 +21,13 @@ router.get('/assets', async (req, res) => {
 });
 
 router.post('/assets', async (req, res) => {
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
+
     try {
-        const { userId, addedAssets, updatedAssets, deletedAssets } = req.body;
+        const { addedAssets, updatedAssets, deletedAssets } = req.body;
 
         // Handle added assets
         if (addedAssets && addedAssets.length > 0) {
@@ -43,8 +53,12 @@ router.post('/assets', async (req, res) => {
     }
 });
 
-router.get('/assets/:userId', async (req, res) => {
-    const { userId } = req.params;
+router.get('/user/assets', async (req, res) => {
+
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
 
     try {
         const assets = await getAssetsByUserId(userId);
@@ -55,7 +69,12 @@ router.get('/assets/:userId', async (req, res) => {
 });
 
 router.post('/nominees', async (req, res) => {
-    const { userId, addedNominees, updatedNominees, deletedNominees } = req.body;
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
+
+    const { addedNominees, updatedNominees, deletedNominees } = req.body;
 
     try {
         // Handle added nominees
@@ -80,8 +99,11 @@ router.post('/nominees', async (req, res) => {
     }
 });
 
-router.get('/nominees/:userId', async (req, res) => {
-    const { userId } = req.params;
+router.get('/user/nominees', async (req, res) => {
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
 
     try {
         const nominees = await getNomineesByUserId(userId);
@@ -92,6 +114,10 @@ router.get('/nominees/:userId', async (req, res) => {
 });
 
 router.post('/alerts', async (req, res) => {
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
     try {
         const alert = await createAlert(req.body);
         res.status(201).json(alert);
@@ -101,6 +127,11 @@ router.post('/alerts', async (req, res) => {
 });
 
 router.put('/alerts/:id', async (req, res) => {
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
+
     try {
         const updatedAlert = await updateAlert(req.params.id, req.body);
         res.json(updatedAlert);
@@ -110,6 +141,11 @@ router.put('/alerts/:id', async (req, res) => {
 });
 
 router.delete('/alerts/:id', async (req, res) => {
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
+
     try {
         await deleteAlert(req.params.id);
         res.json({ message: 'Alert marked as inactive.' });
@@ -119,7 +155,10 @@ router.delete('/alerts/:id', async (req, res) => {
 });
 
 router.get('/alerts/:userId', async (req, res) => {
-    const { userId } = req.params;
+    const userId = req.userId;
+    if (!userId) {
+        return res.status(401).send('Unauthorized');
+    }
 
     try {
         const nominees = await getAlertsByUserId(userId);

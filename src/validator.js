@@ -12,6 +12,7 @@ async function validateSessionToken(req, res, next) {
         if(userData){
             req.userName = userData.payload.name;
             req.emailId = userData.payload.email;
+            req.userId = userData.userId;
             // If the idToken is valid, proceed to the next middleware or route handler
             next();
         }
@@ -21,10 +22,9 @@ async function validateSessionToken(req, res, next) {
         }
     }
     else if(sessionToken){
-    const sessionData = await userController.fetchSession(sessionToken);   
+    const sessionData = await userController.fetchSession(sessionToken);
         if(sessionData){
             req.userId = sessionData.userId;
-            console.log("call next");
             // If the session token is valid, proceed to the next middleware or route handler
             next();
         }

@@ -13,6 +13,7 @@ async function createSession(userId){
         };
     // Add expiry  
     resp = await sessionRepository.createSession(sessionData);
+    console.log(resp);
     return resp;
  };
 
