@@ -24,7 +24,6 @@ const verifyIdToken = (idToken) => {
 
 const fetchSession = async (sessionToken) => {
   const resp = await authService.fetchSession(sessionToken);
-  console.log(resp);
   return resp;
 };
 
